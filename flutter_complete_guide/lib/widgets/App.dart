@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/models/QuestionModel.dart';
-import 'package:flutter_complete_guide/widgets/Question.dart';
+import 'package:flutter_complete_guide/models/AnswerModel.dart';
+import 'package:flutter_complete_guide/widgets/Quiz.dart';
+import 'package:flutter_complete_guide/widgets/Result.dart';
 
 class App extends StatefulWidget {
   @override
@@ -9,45 +11,35 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   int index = 0;
+  int score = 0;
 
   final List<QuestionModel> _questions = [
-    QuestionModel(
-        question: 'What\'s your favorite color?',
-        answers: ['one', 'two', 'three']),
-    QuestionModel(
-        question: 'What\'s your favorite animal?',
-        answers: ['one', 'two', 'three']),
+    QuestionModel(question: 'What\'s your favorite color?', answers: [
+      AnswerModel(text: 'Black', score: 10),
+      AnswerModel(text: 'Red', score: 5),
+      AnswerModel(text: 'Green', score: 3),
+      AnswerModel(text: 'White', score: 1),
+    ]),
+    QuestionModel(question: 'What\'s your favorite animal?', answers: [
+      AnswerModel(text: 'Rabbit', score: 3),
+      AnswerModel(text: 'Snake', score: 11),
+      AnswerModel(text: 'Elephant', score: 5),
+      AnswerModel(text: 'Lion', score: 9),
+    ]),
   ];
 
   void updateIndex(value) {
     setState(() => index = value);
   }
 
-  void answerQuestion(String question) {
-    print(index);
-    if (index < _questions.length) {
-      updateIndex(index + 1);
-    }
+  void restartQuiz() {
+    score = 0;
+    updateIndex(0);
   }
 
-  List<Widget> _createQuestion() {
-    if (index == _questions.length) {
-      return [
-        Text('No more questions!'),
-        RaisedButton(
-          child: Text('Play again'),
-          onPressed: () {
-            updateIndex(0);
-          },
-        )
-      ];
-    }
-    return [
-      Question(
-          text: _questions[index].question,
-          answers: _questions[index].answers,
-          onAnswer: answerQuestion)
-    ];
+  void answerQuestion(answerValue) {
+    updateIndex(index + 1);
+    score += answerValue;
   }
 
   @override
@@ -56,15 +48,17 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         title: 'app',
         home: Scaffold(
-          extendBody: true,
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text('Another "First" App'),
-          ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: _createQuestion(),
-          ),
-        ));
+            extendBody: true,
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text('Another "First" App'),
+            ),
+            body: index < _questions.length
+                ? Quiz(
+                    questions: _questions,
+                    questionIndex: index,
+                    answerCallback: answerQuestion,
+                  )
+                : Result(score, restartQuiz)));
   }
 }

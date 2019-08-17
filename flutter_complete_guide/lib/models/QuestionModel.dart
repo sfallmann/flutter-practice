@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
+import 'package:flutter_complete_guide/models/AnswerModel.dart';
 
-@immutable
 class QuestionModel {
   final String question;
-  final List<String> answers;
+  final List<AnswerModel> answers;
 
-  QuestionModel({@required this.question, @required this.answers});
+  const QuestionModel({@required this.question, @required this.answers});
 }
