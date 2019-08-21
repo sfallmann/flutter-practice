@@ -15,8 +15,30 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final List<Transaction> transactions = [
-    Transaction(id: 't1', title: 'Breakfast', amount: 4.95, date: DateTime.now()),
+    Transaction(
+        id: 't1', title: 'Breakfast', amount: 4.95, date: DateTime.now()),
+    Transaction(id: 't2', title: 'Lunch', amount: 6.95, date: DateTime.now()),
   ];
+
+  List<Widget> mapTransactionsToWidgets() {
+    return transactions.map((transaction) {
+      return Container(
+          width: double.infinity,
+          child: Card(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Container(child: Text(transaction.amount.toString())),
+              Column(
+                children: <Widget>[
+                  Text(transaction.title),
+                  Text(transaction.date.toString())
+                ],
+              )
+            ],
+          )));
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +47,6 @@ class MyHomePage extends StatelessWidget {
         title: Text('Flutter App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Container(
               width: double.infinity,
@@ -33,8 +54,8 @@ class MyHomePage extends StatelessWidget {
                 elevation: 5,
                 child: Text('CHART!'),
               )),
-          Card(
-            child: Text('LIST!'),
+          Column(
+            children: mapTransactionsToWidgets(),
           )
         ],
       ),
