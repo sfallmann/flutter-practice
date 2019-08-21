@@ -34,7 +34,7 @@ class MyHomePage extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(2)),
                       border: Border.all(color: Colors.purple, width: 2)),
                   child: Text(
-                    transaction.amount.toString(),
+                    transaction.formattedAmount,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 24,
@@ -47,7 +47,7 @@ class MyHomePage extends StatelessWidget {
                     transaction.title,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                  Text(transaction.date.toString(), style: TextStyle(color: Colors.grey[800], fontSize: 16),)
+                  Text(transaction.formattedDate, style: TextStyle(color: Colors.grey[800], fontSize: 16),)
                 ],
               )
             ],
