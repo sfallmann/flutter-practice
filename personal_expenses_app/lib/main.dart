@@ -26,13 +26,28 @@ class MyHomePage extends StatelessWidget {
           width: double.infinity,
           child: Card(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Container(child: Text(transaction.amount.toString())),
+              Container(
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(2)),
+                      border: Border.all(color: Colors.purple, width: 2)),
+                  child: Text(
+                    transaction.amount.toString(),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        color: Colors.purple),
+                  )),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(transaction.title),
-                  Text(transaction.date.toString())
+                  Text(
+                    transaction.title,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  Text(transaction.date.toString(), style: TextStyle(color: Colors.grey[800], fontSize: 16),)
                 ],
               )
             ],
