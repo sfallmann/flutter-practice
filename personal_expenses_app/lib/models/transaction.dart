@@ -8,7 +8,7 @@ class Transaction {
   final DateTime date;
 
   String get formattedAmount {
-    return '\$${this.amount}';
+    return '\$${this.amount.toStringAsFixed(2)}';
   }
 
   String get formattedDate {
