@@ -24,13 +24,13 @@ class TransactionList extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(2)),
                           border:
-                              Border.all(color: Colors.purple[200], width: 2)),
+                              Border.all(color: Theme.of(context).primaryColorDark, width: 2)),
                       child: Text(
                         transactions[index].formattedAmount,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
-                            color: Colors.purple),
+                            color: Theme.of(context).primaryColorDark),
                       )),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +38,7 @@ class TransactionList extends StatelessWidget {
                       Text(
                         transactions[index].title,
                         style:
-                            TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                            Theme.of(context).textTheme.title
                       ),
                       Text(
                         transactions[index].formattedDate,
